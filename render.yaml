@@ -1,0 +1,16 @@
+# Render Blueprint (optional). Prefer configuring via Dashboard for Docker.
+services:
+  - type: web
+    name: ripple-devops-backend
+    runtime: docker
+    dockerfilePath: ./docker/Dockerfile.backend
+    dockerContext: .
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: RETRY_LIMIT
+        value: "5"

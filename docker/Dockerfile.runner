@@ -1,0 +1,8 @@
+# Generic test runner image: install deps and run tests in mounted repo
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Default: no pre-install; repo is mounted at /app
+# Run: docker run --rm -v /path/to/repo:/app -w /app node:20-alpine sh -c "npm install && npm test"
+CMD ["sh", "-c", "npm install --silent 2>/dev/null; npm test 2>&1"]

@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+}
+
+/* Glass card */
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-2xl shadow-glass;
+}
+
+/* Loading pulse */
+@keyframes pulse {
+  50% { opacity: 0.6; }
+}
+
+.loading-pulse {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
