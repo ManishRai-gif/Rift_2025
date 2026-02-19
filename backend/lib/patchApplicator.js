@@ -49,7 +49,7 @@ function parseUnifiedDiff(diffText) {
  */
 function parseReplaceInstructions(diffText) {
   const edits = [];
-  const lineRe = /(?:replace\s+)?line\s+(\d+)\s*(?:with)?:?\s*([\s\S]*?)(?=(?:replace\s+line|\n\n|$)/gi;
+  const lineRe = /(?:replace\s+)?line\s+(\d+)\s*(?:with)?:?\s*([\s\S]*?)(?=(?:replace\s+line|\n\n|$))/gi;
   let m;
   while ((m = lineRe.exec(diffText)) !== null) {
     const lineNum = parseInt(m[1], 10);

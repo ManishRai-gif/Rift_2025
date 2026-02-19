@@ -1,8 +1,8 @@
 # Ripple DevOps – Step-by-step hosting & connecting
 
-Host the **backend** on Render and the **frontend** on Vercel or **Netlify**, then connect them with one environment variable.
+Host the **backend** on Render, **Railway**, **Fly.io**, or **Koyeb**, and the **frontend** on Vercel or Netlify. Connect them by setting the backend URL in the frontend env var `VITE_API_URL`.
 
-**Backend URL:** `https://rift-2025.onrender.com`
+**Backend URL:** use the URL your host gives you (e.g. `https://rift-2025.onrender.com` or `https://xxx.up.railway.app`).
 
 ---
 
@@ -62,6 +62,60 @@ Host the **backend** on Render and the **frontend** on Vercel or **Netlify**, th
 - Set **Dockerfile Path** to `docker/Dockerfile.backend`.
 - Set **Docker Context** to `.` (repo root).
 - Build and start commands are not needed when using Docker.
+
+---
+
+## Part 1b: Host the backend elsewhere (free alternatives)
+
+If Render isn’t working or you prefer another host, use one of these. Your backend is a standard Node/Express app; all support GitHub deploy.
+
+### Option A: Railway (recommended)
+
+1. Go to [railway.app](https://railway.app) and sign in with GitHub.
+2. **New Project** → **Deploy from GitHub repo** → select **Rippledevop**.
+3. After the repo is linked, click the new service → **Settings**:
+   - **Root Directory:** `backend`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+4. **Variables** tab: add `GEMINI_API_KEY`, optional `GITHUB_TOKEN`, `RETRY_LIMIT=5`.  
+   Railway sets `PORT` automatically; the app already uses `process.env.PORT`.
+5. **Settings** → **Networking** → **Generate Domain**. Copy the URL (e.g. `https://xxx.up.railway.app`).
+6. Use this URL as `VITE_API_URL` in your frontend (Netlify/Vercel).
+
+Railway gives a small free credit per month; after that it’s paid. Good for testing and light use.
+
+### Option B: Fly.io
+
+1. Install [Fly CLI](https://fly.io/docs/hands-on/install-flyctl/) and sign up: `fly auth signup`.
+2. From your repo root (so `backend/` is visible), run:
+   ```bash
+   cd backend
+   fly launch --no-deploy
+   ```
+   When asked for an app name and region, choose defaults or pick a region.
+3. Set secrets:
+   ```bash
+   fly secrets set GEMINI_API_KEY=your_key
+   fly secrets set GITHUB_TOKEN=optional_token
+   fly secrets set RETRY_LIMIT=5
+   ```
+4. Deploy: `fly deploy`.
+5. Get URL: `fly status` or in the dashboard. Set that as `VITE_API_URL` in the frontend.
+
+Fly.io has a free allowance (e.g. shared-cpu VMs); check [fly.io/docs/about/pricing](https://fly.io/docs/about/pricing/).
+
+### Option C: Koyeb
+
+1. Go to [koyeb.com](https://www.koyeb.com) and sign in with GitHub.
+2. **Create App** → **GitHub** → select **Rippledevop**.
+3. Configure the service:
+   - **Source:** GitHub, branch `main`
+   - **Build:** Runtime **Docker** with Dockerfile, or Runtime **Node** with **Root directory** `backend`, **Build command** `npm install`, **Run command** `node server.js`
+   - **Port:** `5000`
+4. **Advanced** → **Environment variables:** `GEMINI_API_KEY`, `GITHUB_TOKEN` (optional), `RETRY_LIMIT=5`.
+5. Deploy and copy the public URL. Use it as `VITE_API_URL` in the frontend.
+
+Koyeb offers a free tier (e.g. 2 services); see their pricing page for limits.
 
 ---
 

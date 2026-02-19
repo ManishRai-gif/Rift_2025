@@ -1,0 +1,9 @@
+node_modules
+.env
+.env.*
+!.env.example
+clones
+*.log
+.git
+.gitignore
+README*
