@@ -14,6 +14,22 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Root: show that API is running (avoids "blank" when opening Render URL in browser)
+app.get('/', (req, res) => {
+  res.set('Content-Type', 'text/html');
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head><title>Ripple DevOps API</title></head>
+      <body style="font-family: system-ui; max-width: 600px; margin: 2rem auto; padding: 1rem;">
+        <h1>Ripple DevOps API</h1>
+        <p>Backend is running. Use the <strong>frontend app</strong> (Netlify/Vercel) to run the agent.</p>
+        <p><a href="/health">/health</a> &rarr; JSON health check</p>
+      </body>
+    </html>
+  `);
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'ripple-devops' });
 });
