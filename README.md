@@ -47,7 +47,7 @@ Rippledevop/
 
 | Variable       | Description                    |
 |----------------|--------------------------------|
-| `VITE_API_URL` | Backend URL (e.g. `https://your-backend.onrender.com`) |
+| `VITE_API_URL` | Backend URL (e.g. `https://rift-2025.onrender.com`) |
 
 ## API
 
@@ -78,7 +78,7 @@ Rippledevop/
 2. Set **Root Directory** to `frontend`.
 3. **Build command:** `npm run build` (default when root is `frontend`).
 4. **Output directory:** `dist` (configured in `frontend/vercel.json`).
-5. Add **Environment variable:** `VITE_API_URL` = your backend URL (e.g. `https://ripple-devops-backend.onrender.com`).
+5. Add **Environment variable:** `VITE_API_URL` = your backend URL (e.g. `https://rift-2025.onrender.com`).
 6. Deploy. The app will be available at `https://your-project.vercel.app`.
 
 ### Backend (Render)

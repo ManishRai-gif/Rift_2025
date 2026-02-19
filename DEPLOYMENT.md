@@ -2,6 +2,8 @@
 
 Host the **backend** on Render and the **frontend** on Vercel, then connect them with one environment variable.
 
+**Backend URL:** `https://rift-2025.onrender.com`
+
 ---
 
 ## Part 1: Host the backend (Render)
@@ -49,8 +51,9 @@ Host the **backend** on Render and the **frontend** on Vercel, then connect them
 6. Click **Create Web Service**.
 7. Wait for the first deploy to finish. Render will show a URL like:
    ```text
-   https://ripple-devops-backend.onrender.com
+   https://rift-2025.onrender.com
    ```
+   (Or your own service URL if you named it differently.)
 8. Copy this URL — this is your **backend URL**. You will use it in the frontend.
 
 **Optional – Deploy with Docker**
@@ -85,7 +88,7 @@ Host the **backend** on Render and the **frontend** on Vercel, then connect them
 
    | Name | Value |
    |-----|--------|
-   | `VITE_API_URL` | Your Render backend URL, e.g. `https://ripple-devops-backend.onrender.com` |
+   | `VITE_API_URL` | Your Render backend URL, e.g. `https://rift-2025.onrender.com` |
 
    Do **not** add a trailing slash (use `https://...onrender.com`, not `https://...onrender.com/`).
 
